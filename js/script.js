@@ -99,6 +99,7 @@ function createNewGameButton() {
 function createSaveGameButton() {
     var button = document.createElement('button');
     button.textContent = 'Salvar jogo';
+    button.disabled = !isGameComplete();
     
     button.addEventListener('click', saveGame);
     
@@ -106,7 +107,25 @@ function createSaveGameButton() {
 }
 
 function renderSavedGames() {
+    var divSavedGames = document.querySelector('#megasena-saved-games');
+    divSavedGames.innerHTML = '';
     
+    if(state.savedGames.length === 0) {
+        divSavedGames.innerHTML = '<p>Nenhum jogo salvo!</p>';
+    } else {
+        var ulSavedGames = document.createElement('ul');
+        
+        for(var i = 0; i < state.savedGames.length; i++) {
+            var currentSavedGame = state.savedGames[i];
+            
+            var liSavedGame = document.createElement('li');
+            liSavedGame.textContent = currentSavedGame.join(' - ');
+            
+            ulSavedGames.appendChild(liSavedGame);
+        }
+    
+        divSavedGames.appendChild(ulSavedGames);
+    }
 }
 
 function addNumberToGame(numberToAdd) {

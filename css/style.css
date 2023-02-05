@@ -6,6 +6,7 @@ body {
 
 button {
     cursor: pointer;
+    margin: 5px;
 }
 
 .numbers {
