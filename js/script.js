@@ -31,14 +31,20 @@ function renderBoard() {
     divBoard.innerHTML = '';
     
     var ulNumbers = document.createElement('ul');
+    ulNumbers.classList.add('numbers');
     
     for(var i = 0; i < state.board.length; i++) {
         var currentNumber = state.board[i];
         
         var liNumber = document.createElement('li');
         liNumber.textContent = currentNumber;
+        liNumber.classList.add('number');
         
         liNumber.addEventListener('click', handleNumberClick);
+        
+        if(isNumberInGame(currentNumber)) {
+            liNumber.classList.add('selected-number');
+        }
         
         ulNumbers.appendChild(liNumber);
     }
@@ -56,6 +62,7 @@ function handleNumberClick(event) {
     }
     
     console.log(state.currentGame);
+    render();
 }
 
 function renderButtons() {
@@ -155,6 +162,7 @@ function saveGame() {
     
     state.savedGames.push(state.currentGame);
     console.log(state.savedGames);
+    resetGame();
 }
 
 function isGameComplete() {
@@ -163,6 +171,7 @@ function isGameComplete() {
 
 function resetGame() {
     state.currentGame = [];
+    render();
 }
 
 function randomGame() {
@@ -173,6 +182,7 @@ function randomGame() {
         addNumberToGame(randomNumber);
     }
     console.log(state.currentGame);
+    render();
 }
 
 start();
