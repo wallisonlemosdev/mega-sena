@@ -119,7 +119,12 @@ function renderSavedGames() {
             var currentSavedGame = state.savedGames[i];
             
             var liSavedGame = document.createElement('li');
+            
+            currentSavedGame = orderNumbers(currentSavedGame);
+            
             liSavedGame.textContent = currentSavedGame.join(' - ');
+            
+            console.log(currentSavedGame);
             
             ulSavedGames.appendChild(liSavedGame);
         }
@@ -202,6 +207,12 @@ function randomGame() {
     }
     console.log(state.currentGame);
     render();
+}
+
+function orderNumbers(currentSavedGame) {
+  return currentSavedGame.sort(function(a, b) {
+    return a - b;
+  });
 }
 
 start();
