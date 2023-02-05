@@ -11,6 +11,9 @@ function start() {
     addNumberToGame(61);
     addNumberToGame(59);
     addNumberToGame(45);
+    removeNumberFromGame(4);
+    removeNumberFromGame(61);
+    removeNumberFromGame(0);
     
     console.log(state.currentGame);
 }
@@ -32,6 +35,28 @@ function addNumberToGame(numberToAdd) {
     }
     
     state.currentGame.push(numberToAdd);
+}
+
+function removeNumberFromGame(numberToRemove) {
+    
+    if(numberToRemove < 1 || numberToRemove > 60) {
+        console.error('Número inválido! O número deve ser de 1 a 60');
+        return;
+    }
+    
+    var newGame = [];
+    
+    for(var i = 0; i < state.currentGame.length; i++) {
+        var currentNumber = state.currentGame[i];
+        
+        if(currentNumber === numberToRemove) {
+            continue;
+        }
+        
+        newGame.push(currentNumber);
+    }
+    
+    state.currentGame = newGame;
 }
 
 function isNumberInGame(numberToCheck) {
