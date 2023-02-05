@@ -12,10 +12,14 @@ function start() {
     addNumberToGame(59);
     addNumberToGame(45);
     removeNumberFromGame(4);
+    saveGame();
+    addNumberToGame(21);
     removeNumberFromGame(61);
     removeNumberFromGame(0);
+    saveGame();
     
     console.log(state.currentGame);
+    console.log(state.savedGames);
 }
 
 function addNumberToGame(numberToAdd) {
@@ -61,6 +65,19 @@ function removeNumberFromGame(numberToRemove) {
 
 function isNumberInGame(numberToCheck) {
     return state.currentGame.includes(numberToCheck);
+}
+
+function saveGame() {
+    if(!isGameComplete()) {
+        console.error('O jogo não está completo');
+        return;
+    }
+    
+    state.savedGames.push(state.currentGame);
+}
+
+function isGameComplete() {
+    return state.currentGame.length === 6;
 }
 
 start();
