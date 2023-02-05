@@ -22,8 +22,6 @@ function render() {
     renderBoard();
     renderButtons();
     renderSavedGames();
-    
-    console.log(state.currentGame);
 }
 
 function renderBoard() {
@@ -61,7 +59,6 @@ function handleNumberClick(event) {
         addNumberToGame(value);
     }
     
-    console.log(state.currentGame);
     render();
 }
 
@@ -72,10 +69,22 @@ function renderButtons() {
     var buttonNewGame = createNewGameButton();
     var buttonRandomGame = createRandomGameButton();
     var buttonSaveGame = createSaveGameButton();
+    var buttonResetSavedGames = createResetSavedGamesButton();
     
     divButtons.appendChild(buttonNewGame);
     divButtons.appendChild(buttonRandomGame);
     divButtons.appendChild(buttonSaveGame);
+    divButtons.appendChild(buttonResetSavedGames);
+}
+
+function createResetSavedGamesButton() {
+    var button = document.createElement('button');
+    button.textContent = 'Limpar';
+    button.disabled = isSavedGamesEmpty();
+    
+    button.addEventListener('click', resetSavedGames);
+    
+    return button;
 }
 
 function createRandomGameButton() {
@@ -125,8 +134,6 @@ function renderSavedGames() {
             currentSavedGame = orderNumbers(currentSavedGame);
             
             liSavedGame.textContent = currentSavedGame.join(' - ');
-            
-            console.log(currentSavedGame);
             
             ulSavedGames.appendChild(liSavedGame);
         }
@@ -187,7 +194,6 @@ function saveGame() {
     }
     
     state.savedGames.push(state.currentGame);
-    console.log(state.savedGames);
     resetGame();
 }
 
@@ -195,8 +201,17 @@ function isGameComplete() {
     return state.currentGame.length === 6;
 }
 
+function isSavedGamesEmpty() {
+    return state.savedGames.length === 0;
+}
+
 function resetGame() {
     state.currentGame = [];
+    render();
+}
+
+function resetSavedGames() {
+    state.savedGames = [];
     render();
 }
 
@@ -207,7 +222,7 @@ function randomGame() {
         var randomNumber = Math.ceil(Math.random() * 60);
         addNumberToGame(randomNumber);
     }
-    console.log(state.currentGame);
+    
     render();
 }
 
