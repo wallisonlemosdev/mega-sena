@@ -32,3 +32,19 @@ button {
 .selected-number {
     background-color: lightgreen;
 }
+
+.games {
+    border: 1px solid gray;
+    padding: 10px;
+    list-style-type: none;
+    font-family: monospace;
+    font-size: 20px;
+    text-align: center;
+}
+
+.numberGame {
+    display: block;
+    margin: 10px;
+    border: 1px solid gray;
+    padding: 5px;
+}

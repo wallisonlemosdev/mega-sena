@@ -114,11 +114,13 @@ function renderSavedGames() {
         divSavedGames.innerHTML = '<p>Nenhum jogo salvo!</p>';
     } else {
         var ulSavedGames = document.createElement('ul');
+         ulSavedGames.classList.add('games');
         
         for(var i = 0; i < state.savedGames.length; i++) {
             var currentSavedGame = state.savedGames[i];
             
             var liSavedGame = document.createElement('li');
+            liSavedGame.classList.add('numberGame');
             
             currentSavedGame = orderNumbers(currentSavedGame);
             
