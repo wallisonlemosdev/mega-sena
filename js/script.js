@@ -1,8 +1,29 @@
 var state = {board : [], currentGame: [], savedGames: []};
 
 function start() {
+    readLocalStorage();
     createBoard();
     newGame();
+}
+
+function readLocalStorage() {
+    if(!window.localStorage) {
+        return;
+    }
+    
+    var savedGamesFromLocalStorage = window.localStorage.getItem('saved-games');
+    
+    if(savedGamesFromLocalStorage) {
+        state.savedGames = JSON.parse(savedGamesFromLocalStorage);
+    }
+}
+
+function writeLocalStorage() {
+    window.localStorage.setItem('saved-games', JSON.stringify(state.savedGames));
+}
+
+function clearLocalStorage() {
+    window.localStorage.removeItem('saved-games');
 }
 
 function createBoard() {
@@ -194,7 +215,8 @@ function saveGame() {
     }
     
     state.savedGames.push(state.currentGame);
-    resetGame();
+    writeLocalStorage();
+    newGame();
 }
 
 function isGameComplete() {
@@ -212,6 +234,7 @@ function resetGame() {
 
 function resetSavedGames() {
     state.savedGames = [];
+    clearLocalStorage();
     render();
 }
 
