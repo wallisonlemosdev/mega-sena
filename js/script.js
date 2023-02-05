@@ -63,8 +63,19 @@ function renderButtons() {
     divButtons.innerHTML = '';
     
     var buttonNewGame = createNewGameButton();
+    var buttonRandomGame = createRandomGameButton();
     
     divButtons.appendChild(buttonNewGame);
+    divButtons.appendChild(buttonRandomGame);
+}
+
+function createRandomGameButton() {
+     var button = document.createElement('button');
+    button.textContent = 'Jogo aleatório';
+    
+    button.addEventListener('click', randomGame);
+    
+    return button;
 }
 
 function createNewGameButton() {
@@ -140,6 +151,16 @@ function isGameComplete() {
 
 function resetGame() {
     state.currentGame = [];
+}
+
+function randomGame() {
+    resetGame();
+    
+    while(!isGameComplete()) {
+        var randomNumber = Math.ceil(Math.random() * 60);
+        addNumberToGame(randomNumber);
+    }
+    console.log(state.currentGame);
 }
 
 start();
