@@ -20,6 +20,10 @@ function newGame() {
 
 function render() {
     renderBoard();
+    renderButtons();
+    renderSavedGames();
+    
+    console.log(state.currentGame);
 }
 
 function renderBoard() {
@@ -52,6 +56,28 @@ function handleNumberClick(event) {
     }
     
     console.log(state.currentGame);
+}
+
+function renderButtons() {
+    var divButtons = document.querySelector('#megasena-buttons');
+    divButtons.innerHTML = '';
+    
+    var buttonNewGame = createNewGameButton();
+    
+    divButtons.appendChild(buttonNewGame);
+}
+
+function createNewGameButton() {
+    var button = document.createElement('button');
+    button.textContent = 'Novo jogo';
+    
+    button.addEventListener('click', newGame);
+    
+    return button;
+}
+
+function renderSavedGames() {
+    
 }
 
 function addNumberToGame(numberToAdd) {
